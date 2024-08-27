@@ -10,8 +10,17 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import song from "../public/song.mp3";
+import { isAuthenticated } from "./isAuthenticated";
 function Journey() {
   const navigate = useNavigate();
+  useEffect(() => {
+    isAuthenticated().then((result) => {
+      if (!result) {
+        navigate("/");
+      }
+    });
+  }, [navigate]);
+
   const audioRef = useRef(null);
   useEffect(() => {
     const audioElement = audioRef.current;

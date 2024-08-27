@@ -2,9 +2,17 @@ import { useState, useEffect } from "react";
 import bg from "../public/1.jpg";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { isAuthenticated } from "./isAuthenticated";
 function Time() {
   const [timeSince, setTimeSince] = useState({});
   const navigate = useNavigate();
+  useEffect(() => {
+    isAuthenticated().then((result) => {
+      if (!result) {
+        navigate("/");
+      }
+    });
+  }, [navigate]);
   useEffect(() => {
     const startDate = new Date("2022-08-27T19:00:00");
 

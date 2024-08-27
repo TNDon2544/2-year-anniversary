@@ -3,10 +3,19 @@ import videoBg from "../public/video-bg.mp4";
 import { FaArrowLeft } from "react-icons/fa";
 import proud from "../public/proud.mp3";
 import { useEffect, useRef } from "react";
-
+import { isAuthenticated } from "./isAuthenticated";
 function Message() {
   const navigate = useNavigate();
   const audioRef = useRef(null);
+
+  useEffect(() => {
+    isAuthenticated().then((result) => {
+      if (!result) {
+        navigate("/");
+      }
+    });
+  }, [navigate]);
+
   useEffect(() => {
     const audioElement = audioRef.current;
     if (audioElement) {

@@ -18,25 +18,24 @@ function Mail() {
       confirmButtonText: "ตกลง",
       showLoaderOnConfirm: true,
       preConfirm: async (password) => {
-        try {
-          if (password !== "182644") {
-            return Swal.showValidationMessage(`
-              "ไม่ถูกนะจ๊ะ ใบ้ให้รหัสห้อง"
-              `);
-          }
-        } catch (error) {
-          Swal.showValidationMessage(`
-              Request failed: ${error}
-            `);
+        if (password !== "182644") {
+          Swal.showValidationMessage(`"ไม่ถูกนะจ๊ะ ใบ้ให้รหัสห้อง"`);
+          return false;
         }
+        localStorage.setItem("password", password);
+        return true;
       },
-    }).then(() => {
-      Swal.fire({
-        title: "ถูกต้องงงง",
-        preConfirm: () => {
-          navigate("/home");
-        },
-      });
+    }).then((result) => {
+      if (result.isConfirmed && result.value) {
+        Swal.fire({
+          title: "ถูกต้องงงง",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          preConfirm: () => {
+            navigate("/home");
+          },
+        });
+      }
     });
   };
 
