@@ -10,7 +10,7 @@ function Message() {
   useEffect(() => {
     const audioElement = audioRef.current;
     if (audioElement) {
-      audioElement.volume = 0.1;
+      audioElement.volume = 0.3;
       audioElement.currentTime = 45.5;
       audioElement.play();
     }

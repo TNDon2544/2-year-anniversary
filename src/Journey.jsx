@@ -16,7 +16,7 @@ function Journey() {
   useEffect(() => {
     const audioElement = audioRef.current;
     if (audioElement) {
-      audioElement.volume = 0.1;
+      audioElement.volume = 0.3;
       audioElement.currentTime = 4.6;
       audioElement.play();
     }
